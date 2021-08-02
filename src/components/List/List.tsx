@@ -5,14 +5,14 @@ import Loader from '../Loader';
 import ListForm from './ListForm';
 import { getEmployees, deleteEmployee } from '../../redux/redusers/list-reducer';
 import { RootStateType } from '../../redux/store';
-import { RouteProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
 const mapStateToProps = (state: RootStateType) => ({
   employees: state.list.employees,
   inProgress: state.list.inProgress,
 });
 
-type PropsType = PropsFromRedux & RouteProps
+type PropsType = PropsFromRedux & RouteComponentProps
 
 class List extends React.Component<PropsType> {
   componentDidMount() {
@@ -33,7 +33,7 @@ class List extends React.Component<PropsType> {
         {this.props.inProgress ? <Loader message="Loading..." /> :
           this.props.employees.length !== 0 ?
             (<div className="nowrap d-flex flex-wrap justify-content-start">
-              {this.props.employees.map((el) => <Card key={el.id} state={el} id={el.id} deleteCard={this.handleClick} />)}
+              {this.props.employees.map((el) => <Card key={el.id} state={el} id={`${el.id}`} deleteCard={this.handleClick} />)}
             </div>)
             : <span className="message">Employee not found</span>}
       </>

@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import list from './redusers/list-reducer'
+import employee from './redusers/employee-reducer'
+import add from './redusers/add-reducer'
 
-export const store = configureStore({ reducer: { list } })
+export const store = configureStore({ reducer: { list, employee, add } })
 
 //@ts-ignore
 window.store = store;

@@ -4,7 +4,7 @@ import { MouseEvent } from 'react';
 
 type PropsType = {
   state: any
-  id: number
+  id: string
   deleteCard: (event: MouseEvent<HTMLAnchorElement>) => void
 }
 
@@ -16,8 +16,8 @@ const Card = (props: PropsType) => {
         <h5 className="card-title">{props.state.name}</h5>
         <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <div className="d-flex justify-content-between">
-          <Link className="btn btn-outline-danger" to="#" id={`${props.id}`} onClick={props.deleteCard}>X</Link>
-          <Link className="btn btn-outline-primary" to={`/employees/${props.id}`}>More</Link>
+          <Link className="btn btn-outline-danger" to="#" id={props.id} onClick={props.deleteCard}>X</Link>
+          <Link className="btn btn-outline-primary" to={'/employees/' + props.id}>More</Link>
         </div>
       </div>
     </div>

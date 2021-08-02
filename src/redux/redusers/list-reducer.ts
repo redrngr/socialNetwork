@@ -2,12 +2,11 @@
 import { LIST_PAGE_LOADED, ASYNC_TOGGLE } from "../actionTypes";
 import agent from '../../api';
 import { EmployeeType } from "../../types";
-import { AppDispatchType } from "../store";
-
+import { AppDispatchType, InferActionsTypes } from "../store";
 
 const initialState = {
   employees: [] as EmployeeType[],
-  inProgress: false
+  inProgress: false,
 };
 
 type InitialStateType = typeof initialState
@@ -29,7 +28,7 @@ const list = (state: InitialStateType = initialState, action: any): InitialState
   }
 }
 
-// type ActionType = InferActionsTypes<typeof actions>
+type ActionsTypes = InferActionsTypes<typeof actions>
 
 const actions = {
   loadAC: (payload: Array<EmployeeType>) => ({ type: LIST_PAGE_LOADED, payload }),
@@ -42,7 +41,8 @@ export const getEmployees = () => (dispatch: AppDispatchType) => {
     .then(data => {
       dispatch(actions.asyncAC(false));
       dispatch(actions.loadAC(data));
-    });
+    })
+    .catch(console.log);
 }
 
 export const searchEmployee = (text: string) => (dispatch: AppDispatchType) => {
@@ -51,7 +51,8 @@ export const searchEmployee = (text: string) => (dispatch: AppDispatchType) => {
     .then(data => {
       dispatch(actions.asyncAC(false));
       dispatch(actions.loadAC(data));
-    });
+    })
+    .catch(console.log);
 }
 
 export const deleteEmployee = (id: number) => (dispatch: AppDispatchType) => {
@@ -60,7 +61,8 @@ export const deleteEmployee = (id: number) => (dispatch: AppDispatchType) => {
     .then(res => {
       dispatch(actions.asyncAC(false));
       if (res.status >= 200 && res.status < 400) getEmployees();
-    });
+    })
+    .catch(console.log);
 }
 
 export default list;

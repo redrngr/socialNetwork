@@ -2,12 +2,9 @@ import React, { ChangeEvent } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { searchEmployee, getEmployees } from '../../redux/redusers/list-reducer';
 
-
 type PropsType = PropsFromRedux
 
-type StateType = {
-  searchText: string
-}
+type StateType = { searchText: string }
 
 class ListForm extends React.Component<PropsType, StateType> {
   constructor(props: PropsType) {
@@ -53,7 +50,7 @@ class ListForm extends React.Component<PropsType, StateType> {
             value={this.state.searchText}
             onChange={this.handleChange}
           />
-          <button className="btn btn-secondary" type="reset">Reset</button>
+          <button className="btn btn-outline-secondary" type="reset">Reset</button>
         </div>
       </form>
     )

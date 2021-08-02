@@ -3,15 +3,15 @@ import { NavLink, Link, RouteProps } from 'react-router-dom';
 import DropMenu from './DropMenu';
 import logo from '../../assets/images/logo.svg';
 
-type StateType = {
-  showDrop: boolean
-}
+type StateType = { showDrop: boolean }
 
 type PropsType = RouteProps
 
 class Nav extends React.Component<PropsType, StateType> {
-
-  state = { showDrop: false }
+  constructor(props: PropsType) {
+    super(props);
+    this.state = { showDrop: false }
+  }
 
   handleClick = () => {
     this.setState({ showDrop: !this.state.showDrop })
