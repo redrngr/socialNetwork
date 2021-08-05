@@ -1,12 +1,18 @@
-// import { InferActionsTypes } from './../store';
+import { SET_TOTAL_USERS_COUNT, SET_CURRENT_PAGE, SET_FILTER } from './../actionTypes';
 import { LIST_PAGE_LOADED, ASYNC_TOGGLE } from "../actionTypes";
-import agent from '../../api';
+import api from '../../api';
 import { EmployeeType } from "../../types";
-import { AppDispatchType, InferActionsTypes } from "../store";
+import { AppDispatchType } from "../store";
 
 const initialState = {
   employees: [] as EmployeeType[],
   inProgress: false,
+  pageSize: 10,
+  totalUsersCount: 0,
+  currentPage: 1,
+  filter: {
+    term: ''
+  }
 };
 
 type InitialStateType = typeof initialState
@@ -16,53 +22,57 @@ const list = (state: InitialStateType = initialState, action: any): InitialState
     case LIST_PAGE_LOADED:
       return {
         ...state,
-        employees: action.payload
+        employees: action.employees
       };
     case ASYNC_TOGGLE:
       return {
         ...state,
         inProgress: action.inProgress
       };
+    case SET_TOTAL_USERS_COUNT:
+      return {
+        ...state,
+        totalUsersCount: action.totalUsersCount
+      };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.page
+      };
+    case SET_FILTER:
+      return {
+        ...state,
+        filter: { term: action.term }
+      };
     default:
       return state;
   }
 }
 
-type ActionsTypes = InferActionsTypes<typeof actions>
+// type ActionsTypes = InferActionsTypes<typeof actions>
 
 const actions = {
-  loadAC: (payload: Array<EmployeeType>) => ({ type: LIST_PAGE_LOADED, payload }),
+  loadAC: (employees: Array<EmployeeType>) => ({ type: LIST_PAGE_LOADED, employees }),
   asyncAC: (inProgress: boolean) => ({ type: ASYNC_TOGGLE, inProgress }),
+  setTotalUsersCountAC: (totalUsersCount: number) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCount }),
+  setCurrentPageAC: (page: number) => ({ type: SET_CURRENT_PAGE, page }),
+  setFilterAC: (term: string) => ({ type: SET_FILTER, term })
 }
 
-export const getEmployees = () => (dispatch: AppDispatchType) => {
-  dispatch(actions.asyncAC(true));
-  agent.Employees.all()
+export const getEmployees = (page: number, pageSize: number, term: string) => (dispatch: AppDispatchType) => {
+  dispatch(actions.asyncAC(true))
+  api.Employees.get(page, pageSize, term)
     .then(data => {
-      dispatch(actions.asyncAC(false));
-      dispatch(actions.loadAC(data));
+      dispatch(actions.asyncAC(false))
+      dispatch(actions.loadAC(data.items))
+      dispatch(actions.setTotalUsersCountAC(data.totalCount))
     })
-    .catch(console.log);
-}
-
-export const searchEmployee = (text: string) => (dispatch: AppDispatchType) => {
-  dispatch(actions.asyncAC(true));
-  agent.Employees.search(text)
-    .then(data => {
-      dispatch(actions.asyncAC(false));
-      dispatch(actions.loadAC(data));
-    })
-    .catch(console.log);
-}
-
-export const deleteEmployee = (id: number) => (dispatch: AppDispatchType) => {
-  dispatch(actions.asyncAC(true));
-  agent.Employees.delete(id)
-    .then(res => {
-      dispatch(actions.asyncAC(false));
-      if (res.status >= 200 && res.status < 400) getEmployees();
-    })
-    .catch(console.log);
+    .catch(error => {
+      dispatch(actions.asyncAC(false))
+      console.log(error)
+    });
+  dispatch(actions.setCurrentPageAC(page))
+  dispatch(actions.setFilterAC(term))
 }
 
 export default list;

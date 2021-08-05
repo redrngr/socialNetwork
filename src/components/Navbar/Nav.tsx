@@ -35,11 +35,6 @@ class Nav extends React.Component<PropsType, StateType> {
                 Employees
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/add" className="nav-link text-white" activeClassName="active">
-                New employee
-              </NavLink>
-            </li>
           </ul>
         </div>
         <div className="dropdown">

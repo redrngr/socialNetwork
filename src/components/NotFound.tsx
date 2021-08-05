@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return (
     <div className="text-center" style={{ paddingTop: "30vh" }}>
       <h1>Oops!</h1>

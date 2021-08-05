@@ -1,6 +1,4 @@
 import { Route, Switch } from 'react-router-dom';
-import Add from './Add';
-import Employee from './List/Employee';
 import List from './List/List';
 import Nav from './Navbar/Nav';
 import NotFound from './NotFound';
@@ -17,8 +15,6 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Welcome} />
             <Route exact path="/employees" component={List} />
-            <Route path="/add" component={Add} />
-            <Route path="/employees/:id" component={Employee} />
             <Route component={NotFound} />
           </Switch>
         </div>
