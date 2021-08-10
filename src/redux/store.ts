@@ -1,7 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { applyMiddleware, combineReducers, createStore } from '@reduxjs/toolkit'
+import thunk from 'redux-thunk';
 import list from './redusers/list-reducer'
+import profile from './redusers/profile-reducer'
+import common from './redusers/common-reducer'
 
-export const store = configureStore({ reducer: { list } })
+export const store = createStore(combineReducers({ list, profile, common }), applyMiddleware(thunk))
 
 //@ts-ignore
 window.store = store;

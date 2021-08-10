@@ -9,7 +9,7 @@ type PropsType = {
 }
 
 const ListForm: React.FC<PropsType> = (props) => {
-  const [term, setTerm] = useState(props.term)
+  const [term, setTerm] = useState('')
 
   const handleReset = () => {
     if (term) {

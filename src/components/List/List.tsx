@@ -20,7 +20,7 @@ const mapStateToProps = (state: RootStateType) => ({
 
 type PropsType = PropsFromRedux & RouteComponentProps
 
-const List: React.FC<PropsType> = (props) => {
+const List: React.FC<PropsType> = ({ ...props }) => {
 
   useEffect(() => {
     props.getEmployees(1, props.pageSize, '')
@@ -65,11 +65,15 @@ const List: React.FC<PropsType> = (props) => {
       {props.inProgress ? <Loader message="Loading..." /> :
         props.employees.length !== 0 ?
           (
-            <div className="nowrap d-flex flex-wrap justify-content-start">
+            <div className="d-flex flex-wrap justify-content-start">
               {props.employees.map((el) => <Card key={el.id} state={el} id={el.id} />)}
             </div>
-          )
-          : <span className="alert alert-secondary">Employee not found</span>}
+          ) : (
+            <div className="d-flex">
+              <span className="alert alert-warning ms-3">Employees not found</span>
+            </div>
+          )}
+
     </>
   )
 }
