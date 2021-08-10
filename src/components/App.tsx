@@ -2,7 +2,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Profile from './Profile';
 import List from './List/List';
 import Nav from './Navbar/Nav';
-import NotFound from './NotFound';
 import Welcome from './Welcome';
 import Login from './Login';
 import { RootStateType } from '../redux/store';

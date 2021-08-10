@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { store } from './redux/store';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, HashRouter as Router, Switch } from 'react-router-dom';
 import App from './components/App';
 import './assets/bootstrap.min.css';
 
