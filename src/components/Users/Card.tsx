@@ -22,7 +22,7 @@ const Card: React.FC<PropsType> = ({ id, state }) => {
           <h5 className="card-title">{state.name}</h5>
           <p className="card-text">{state.status || 'Hi! i am React JS Junior developer'}</p>
         </div>
-        <Link className="btn btn-outline-primary" to={'/employees/' + id}>More</Link>
+        <Link className="btn btn-outline-primary" to={'/users/' + id}>More</Link>
       </div>
     </div>
   )

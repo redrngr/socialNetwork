@@ -54,7 +54,7 @@ const actions = {
 
 export const getProfile = (id: number) => (dispatch: AppDispatchType) => {
   dispatch(actions.asyncAC(true))
-  api.Employees.profile(id)
+  api.Users.profile(id)
     .then(data => {
       dispatch(actions.asyncAC(false))
       dispatch(actions.loadAC(data))

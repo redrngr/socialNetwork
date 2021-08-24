@@ -8,7 +8,7 @@ type PropsType = {
   handleSearch: (text: string) => any
 }
 
-const ListForm: React.FC<PropsType> = (props) => {
+const UsersForm: React.FC<PropsType> = (props) => {
   const [term, setTerm] = useState('')
 
   const handleReset = () => {
@@ -42,4 +42,4 @@ const ListForm: React.FC<PropsType> = (props) => {
   )
 }
 
-export default ListForm;
+export default UsersForm;

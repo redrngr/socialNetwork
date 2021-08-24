@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 type PropsType = {
-  onOutside: () => void,
-  setAuth: (isAuth: boolean) => void
+  onOutside: (e: MouseEvent<HTMLAnchorElement>) => void,
+  logout: () => void
 }
 
-const DropMenu: React.FC<PropsType> = ({ onOutside, setAuth }) => {
+const DropMenu: React.FC<PropsType> = (props) => {
   let wrapperRef: any = null;
 
   useEffect(() => {
@@ -15,21 +15,15 @@ const DropMenu: React.FC<PropsType> = ({ onOutside, setAuth }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const setWrapperRef = (node: any) => {
-    wrapperRef = node;
-    console.log(wrapperRef)
+  const setWrapperRef = (node: any) => wrapperRef = node
+
+  const handleClickOutside = (e: any) => {
+    if (wrapperRef && !wrapperRef.contains(e.target) && !wrapperRef.previousSibling.contains(e.target)) props.onOutside(e)
   }
 
-  const handleClickOutside = (event: any) => {
-    console.log('outside')
-    console.log(event)
-    if (wrapperRef && !wrapperRef.contains(event.target)) onOutside()
-  }
-
-  const Logout = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    onOutside()
-    setAuth(false)
+  const logout = (e: MouseEvent<HTMLAnchorElement>) => {
+    props.onOutside(e)
+    props.logout()
   }
 
   return (
@@ -41,7 +35,7 @@ const DropMenu: React.FC<PropsType> = ({ onOutside, setAuth }) => {
       ref={setWrapperRef}
     >
       <li>
-        <Link className="dropdown-item" to="#" onClick={Logout}>Logout</Link>
+        <Link className="dropdown-item" to="#" onClick={logout}>Logout</Link>
       </li>
     </ul>
   )

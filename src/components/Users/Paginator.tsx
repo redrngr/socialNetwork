@@ -38,12 +38,20 @@ const Paginator: React.FC<PropsType> = ({ totalCount, pageSize, currentPage, por
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination mb-0" onClick={handleClick}>
-        <li className='page-item'><NavLink className="page-link" onClick={previousPortion} to="#">Previous</NavLink></li>
+        <li className='page-item'>
+          <NavLink className="page-link" onClick={previousPortion} to="#" aria-disabled={!totalCount}>
+            Previous
+          </NavLink>
+        </li>
         {pageArray.filter((el) => el >= leftLimit && el <= rightLimit)
           .map((el) => <li key={el} className={currentPage === el ? 'page-item active' : 'page-item'}>
             <NavLink className='page-link' id={el} to="#">{el}</NavLink>
           </li>)}
-        <li className="page-item"><NavLink className="page-link" onClick={nextPortion} to="#">Next</NavLink></li>
+        <li className="page-item">
+          <NavLink className="page-link" onClick={nextPortion} to="#" aria-disabled={!totalCount}>
+            Next
+          </NavLink>
+        </li>
       </ul>
     </nav>
   )

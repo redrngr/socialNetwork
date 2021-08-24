@@ -1,15 +1,20 @@
 import axios from 'axios';
 
 const instance = axios.create({
+  withCredentials: true,
   baseURL: 'https://social-network.samuraijs.com/api/1.0',
   headers: {
     'API-KEY': 'b5ca5d77-73a2-4e1d-9d41-4093195e078c'
-  },
-  responseType: 'json',
+  }
 });
 
+const Auth = {
+  me: () => instance.get('/auth/me'),
+  login: (email: string, password: string, rememberMe: boolean) => instance.post('/auth/login', { email, password, rememberMe }),
+  logout: () => instance.delete('/auth/login')
+}
 
-const Employees = {
+const Users = {
   all: (currentPage: number, pageSize: number, term: string) => instance.get('/users', {
     params: {
       page: currentPage,
@@ -21,4 +26,4 @@ const Employees = {
 };
 
 // eslint-disable-next-line
-export default { Employees };
+export default { Users, Auth };

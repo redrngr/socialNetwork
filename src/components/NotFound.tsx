@@ -9,10 +9,11 @@ const NotFound: React.FC = () => {
         Sorry, an error has occured, Requested page not found!
       </div>
       <div className="error-actions">
-        <Link to="/employees" className="btn btn-primary btn-lg me-3"><span className="glyphicon glyphicon-home"></span>
-          Show employee's list </Link>
-        <Link to="/add" className="btn btn-success btn-lg"><span className="glyphicon glyphicon-envelope"></span>
-          Add new employee </Link>
+        <Link to="/users" className="btn btn-primary btn-lg me-3">
+          <span className="glyphicon glyphicon-home">
+            Show users's list
+          </span>
+        </Link>
       </div>
     </div>
   )

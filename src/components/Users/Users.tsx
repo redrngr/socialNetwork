@@ -3,14 +3,14 @@ import { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import Card from './Card';
 import Loader from '../Loader';
-import ListForm from './ListForm';
+import ListForm from './UsersForm';
 import Paginator from './Paginator';
-import { getEmployees } from '../../redux/redusers/list-reducer';
+import { getUsers } from '../../redux/redusers/list-reducer';
 import { RootStateType } from '../../redux/store';
 import { RouteComponentProps } from 'react-router-dom';
 
 const mapStateToProps = (state: RootStateType) => ({
-  employees: state.list.employees,
+  users: state.list.users,
   inProgress: state.list.inProgress,
   totalUsersCount: state.list.totalUsersCount,
   currentPage: state.list.currentPage,
@@ -20,19 +20,19 @@ const mapStateToProps = (state: RootStateType) => ({
 
 type PropsType = PropsFromRedux & RouteComponentProps
 
-const List: React.FC<PropsType> = ({ ...props }) => {
+const Users: React.FC<PropsType> = ({ ...props }) => {
 
   useEffect(() => {
-    props.getEmployees(1, props.pageSize, '')
+    props.getUsers(1, props.pageSize, '')
   }, [])
 
   const handleClick = (event: any) => {
     let id = Number(event.target.id)
     if (id === props.currentPage) return
-    props.getEmployees(id, props.pageSize, props.term)
+    props.getUsers(id, props.pageSize, props.term)
   }
 
-  let handleSearch = (text: string) => props.getEmployees(1, props.pageSize, text)
+  let handleSearch = (text: string) => props.getUsers(1, props.pageSize, text)
 
   const debounce = (fn: (...params: any[]) => any, interval: number) => {
     let timer: ReturnType<typeof setTimeout>
@@ -63,22 +63,22 @@ const List: React.FC<PropsType> = ({ ...props }) => {
       </div>
       <hr />
       {props.inProgress ? <Loader message="Loading..." /> :
-        props.employees.length !== 0 ?
+        props.users.length !== 0 ?
           (
             <div className="d-flex flex-wrap justify-content-start">
-              {props.employees.map((el) => <Card key={el.id} state={el} id={el.id} />)}
+              {props.users.map(el => <Card key={el.id} state={el} id={el.id} />)}
             </div>
           ) : (
             <div className="d-flex">
-              <span className="alert alert-warning ms-3">Employees not found</span>
+              <span className="alert alert-warning ms-3">Users not found</span>
             </div>
           )}
 
     </>
   )
 }
-const connector = connect(mapStateToProps, { getEmployees })
+const connector = connect(mapStateToProps, { getUsers })
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-export default connector(List);
+export default connector(Users);

@@ -1,9 +1,9 @@
 import api from '../../api';
-import { EmployeeType } from "../../types";
+import { UsersType } from "../../types";
 import { AppDispatchType, InferActionsTypes } from "../store";
 
 const initialState = {
-  employees: [] as EmployeeType[],
+  users: [] as UsersType[],
   inProgress: false,
   pageSize: 10,
   totalUsersCount: 0,
@@ -20,7 +20,7 @@ const list = (state: InitialStateType = initialState, action: ActionsTypes): Ini
     case 'LIST_PAGE_LOADED':
       return {
         ...state,
-        employees: action.employees
+        users: action.users
       };
     case 'ASYNC_TOGGLE':
       return {
@@ -50,16 +50,16 @@ const list = (state: InitialStateType = initialState, action: ActionsTypes): Ini
 type ActionsTypes = InferActionsTypes<typeof actions>
 
 const actions = {
-  loadAC: (employees: Array<EmployeeType>) => ({ type: 'LIST_PAGE_LOADED', employees } as const),
+  loadAC: (users: Array<UsersType>) => ({ type: 'LIST_PAGE_LOADED', users } as const),
   asyncAC: (inProgress: boolean) => ({ type: 'ASYNC_TOGGLE', inProgress } as const),
   setTotalUsersCountAC: (totalUsersCount: number) => ({ type: 'SET_TOTAL_USERS_COUNT', totalUsersCount } as const),
   setCurrentPageAC: (page: number) => ({ type: 'SET_CURRENT_PAGE', page } as const),
   setFilterAC: (term: string) => ({ type: 'SET_FILTER', term } as const)
 }
 
-export const getEmployees = (page: number, pageSize: number, term: string) => (dispatch: AppDispatchType) => {
+export const getUsers = (page: number, pageSize: number, term: string) => (dispatch: AppDispatchType) => {
   dispatch(actions.asyncAC(true))
-  api.Employees.all(page, pageSize, term)
+  api.Users.all(page, pageSize, term)
     .then(data => {
       dispatch(actions.asyncAC(false))
       dispatch(actions.loadAC(data.items))
