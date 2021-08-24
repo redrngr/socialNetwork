@@ -57,9 +57,9 @@ export const getUserData = () => (dispatch: AppDispatchType) => {
     if (res.data.resultCode === 0) {
       const { id, email, login } = res.data.data
       dispatch(actions.setAuthDataAC(id, login, email, true))
-      dispatch(actions.loadAppAC())
     }
     dispatch(actions.asyncAC(false))
+    dispatch(actions.loadAppAC())
   })
 }
 
