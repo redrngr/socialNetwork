@@ -5,7 +5,7 @@ import { RootStateType } from '../redux/store';
 import { login } from '../redux/redusers/common-reducer';
 import { useState } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Redirect } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const mapStateToProps = (state: RootStateType) => ({
   isAuth: state.common.isAuth,
@@ -19,18 +19,16 @@ const Login: React.FC<PropsType> = (props) => {
 
   const [authData, setAuthData] = useState({ email: '', password: '', rememberMe: false })
 
-  const Login = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     props.login(authData.email, authData.password, authData.rememberMe)
   }
 
-  if (props.isAuth) {
-    <Redirect to='/' />
-  }
+  useEffect(() => { if (props.isAuth) props.history.push('/profile') }, [props.isAuth])
 
   return (
     <main className="container pt-5 text-center">
-      <form className="w-25 mx-auto" onSubmit={Login}>
+      <form className="w-25 mx-auto" onSubmit={handleSubmit}>
         <img className="mb-4" src={logo} alt="pic" width="72" height="57" style={{ fontSize: 0 }} />
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
         {props.messages && <ul className="ps-4 alert alert-danger text-start">{props.messages.map(el => <li>{el}</li>)}</ul>}

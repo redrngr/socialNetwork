@@ -18,7 +18,6 @@ const Nav: React.FC<PropsType> = (props) => {
   const [showDrop, setShowDrop] = useState(false)
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    console.log("click")
     e.stopPropagation()
     setShowDrop(!showDrop)
   }

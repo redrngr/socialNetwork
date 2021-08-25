@@ -40,39 +40,39 @@ const Profile: React.FC<PropsType> = ({ profile, ...props }) => {
         <form className="row g-3">
           <div className="col-md-6">
             <label htmlFor="name" className="form-label">Name</label>
-            <input type="text" className="form-control" id="name" value={profile.fullName} disabled={!editMode} readOnly={!editMode} />
+            <input type="text" className="form-control" id="name" value={profile.fullName || ''} disabled={!editMode} readOnly={!editMode} />
           </div>
           <div className="col-md-6">
             <label htmlFor="github" className="form-label">GITHUB</label>
-            <input type="tel" className="form-control" id="github" value={profile.contacts.github} disabled={!editMode} readOnly={!editMode} />
+            <input type="tel" className="form-control" id="github" value={profile.contacts.github || ''} disabled={!editMode} readOnly={!editMode} />
           </div>
           <div className="col-md-6">
             <label htmlFor="vk" className="form-label">VK</label>
-            <input type="email" className="form-control" id="vk" value={profile.contacts.vk} disabled={!editMode} readOnly={!editMode} />
+            <input type="email" className="form-control" id="vk" value={profile.contacts.vk || ''} disabled={!editMode} readOnly={!editMode} />
           </div>
           <div className="col-md-6">
             <label htmlFor="facebook" className="form-label">FACEBOOK</label>
-            <input type="text" className="form-control" id="facebook" value={profile.contacts.facebook} disabled={!editMode} readOnly={!editMode} />
+            <input type="text" className="form-control" id="facebook" value={profile.contacts.facebook || ''} disabled={!editMode} readOnly={!editMode} />
           </div>
           <div className="col-12">
             <label htmlFor="instagram" className="form-label">INSTAGRAM</label>
-            <input type="text" className="form-control" id="instagram" value={profile.contacts.instagram} disabled={!editMode} readOnly={!editMode} />
+            <input type="text" className="form-control" id="instagram" value={profile.contacts.instagram || ''} disabled={!editMode} readOnly={!editMode} />
           </div>
           <div className="col-12">
             <label htmlFor="twitter" className="form-label">TWITTER</label>
-            <input type="text" className="form-control" id="twitter" value={profile.contacts.twitter} disabled={!editMode} readOnly={!editMode} />
+            <input type="text" className="form-control" id="twitter" value={profile.contacts.twitter || ''} disabled={!editMode} readOnly={!editMode} />
           </div>
           <div className="col-12">
             <label htmlFor="website" className="form-label">WEBSITE</label>
-            <input type="text" className="form-control" id="website" value={profile.contacts.website} disabled={!editMode} readOnly={!editMode} />
+            <input type="text" className="form-control" id="website" value={profile.contacts.website || ''} disabled={!editMode} readOnly={!editMode} />
           </div>
           <div className="col-md-6">
             <label htmlFor="youtube" className="form-label">YOUTUBE</label>
-            <input type="text" className="form-control" id="youtube" value={profile.contacts.youtube} disabled={!editMode} readOnly={!editMode} />
+            <input type="text" className="form-control" id="youtube" value={profile.contacts.youtube || ''} disabled={!editMode} readOnly={!editMode} />
           </div>
           <div className="col-md-2">
             <label htmlFor="mainLink" className="form-label">MAINLINK</label>
-            <input type="text" className="form-control" id="mainLink" value={profile.contacts.mainLink} disabled={!editMode} readOnly={!editMode} />
+            <input type="text" className="form-control" id="mainLink" value={profile.contacts.mainLink || ''} disabled={!editMode} readOnly={!editMode} />
           </div>
           {(id === props.ownId) &&
             (<div className="d-flex justify-content-between mt-3 mb-3">

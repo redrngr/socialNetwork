@@ -20,33 +20,34 @@ const App: React.FC<PropsFromRedux> = (props) => {
 
   useEffect(() => {
     props.getUserData()
-  }, [])
+  }, [props.isAuth])
 
   if (props.appLoaded) {
-    return (
+    if (!props.isAuth) return (
       <div className="d-flex flex-nowrap vh-100 overflow-hidden">
-        {props.isAuth
-          ?
-          (<>
-            <aside className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style={{ width: "280px" }}>
-              <Nav />
-            </aside>
-            <main className="container pt-3">
-              <Switch>
-                <Route exact path="/" component={Welcome} />
-                <Route exact path="/profile" component={Profile} />
-                <Route exact path="/users" component={Users} />
-                <Route path="/users/:id" component={Profile} />
-                <Route path="/404" component={NotFound} />
-                <Redirect to="/404" />
-              </Switch>
-            </main >
-          </>)
-          :
-          (<Switch>
+        <main className="container pt-3">
+          <Switch>
             <Route path="/login" component={Login} />
             <Redirect to="/login" />
-          </Switch>)}
+          </Switch>
+        </main >
+      </div >
+    )
+    return (
+      <div className="d-flex flex-nowrap vh-100 overflow-hidden">
+        <aside className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style={{ width: "280px" }}>
+          <Nav />
+        </aside>
+        <main className="container pt-3">
+          <Switch>
+            <Route exact path="/" component={Welcome} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/users" component={Users} />
+            <Route path="/users/:id" component={Profile} />
+            <Route path="/login" component={Login} />
+            <Route component={NotFound} />
+          </Switch>
+        </main >
       </div >
     )
   }

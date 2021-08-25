@@ -5,7 +5,6 @@ const initialState = {
   id: 0,
   email: '',
   login: '',
-  password: '',
   messages: null as string[] | null,
   isAuth: false,
   inProgress: false,
